@@ -1,10 +1,9 @@
+const createError = require('http-errors'); // <--- MISSING IN YOUR CODE
 const express = require('express');
 const path = require('path');
-const { dbMiddleware} = require('./bin/db');
-
+const { dbMiddleware } = require('./bin/db');
 
 const indexRouter = require('./routes/index');
-//add more handlers here
 
 const app = express();
 
@@ -12,17 +11,18 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Database connection middleware
 app.use(dbMiddleware);
+
 app.use('/', indexRouter);
-//add more routes here
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(404)); // This works now that we imported createError
 });
 
 // error handler

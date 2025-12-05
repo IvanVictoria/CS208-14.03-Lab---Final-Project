@@ -1,8 +1,180 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Brand Guidelines:
+  Dark Green: #10291D
+  Saffron: #F7C64A
+  Seasalt: #F7F7F7
+  Text on Seasalt: #000000
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --brand-green: #10291D;
+  --brand-saffron: #F7C64A;
+  --brand-seasalt: #F7F7F7;
+  --text-black: #000000;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--brand-seasalt);
+  color: var(--text-black);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3 {
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.brand-font {
+  font-family: 'Italianno', cursive;
+  font-weight: 400;
+}
+
+/* Layout */
+header {
+  background-color: var(--brand-green);
+  padding: 1rem 2rem;
+  border-bottom: 4px solid var(--brand-saffron);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: 'Italianno', cursive;
+  color: var(--brand-saffron);
+  font-size: 3rem;
+  text-decoration: none;
+  line-height: 0.8;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--brand-seasalt);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--brand-saffron);
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: var(--brand-green);
+  color: var(--brand-seasalt);
+  text-align: center;
+  padding: 2rem;
+  margin-top: auto;
+}
+
+/* Components */
+.btn {
+  display: inline-block;
+  background-color: var(--brand-green);
+  color: var(--brand-saffron);
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(rgba(16, 41, 29, 0.9), rgba(16, 41, 29, 0.7)), url('https://images.unsplash.com/photo-1551024601-562963525c2c?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  color: var(--brand-seasalt);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  color: var(--brand-saffron);
+  font-size: 4rem;
+  margin: 0;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.menu-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  border-top: 4px solid var(--brand-saffron);
+}
+
+.comment-card {
+  background: white;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid var(--brand-green);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Mobile friendly: */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nav-links {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero h1 {
+    font-size: 3rem;
+  }
 }

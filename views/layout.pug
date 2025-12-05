@@ -1,7 +1,22 @@
 doctype html
 html
   head
-    title= title
+    title Downtown Donuts | #{title}
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      nav
+        a.logo(href='/') Downtown Donuts
+        ul.nav-links
+          li: a(href='/') Home
+          li: a(href='/menu') Menu
+          li: a(href='/sbout') About
+          li: a(href='/comments') Comments
+    
+    main
+      block content
+
+    footer
+      p &copy; 2025 Downtown Donuts. Family Owned Since 1992.
+      p 123 Main St, Downtown | Open Daily 6am - 2pm

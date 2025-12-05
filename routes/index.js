@@ -2,54 +2,50 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next){
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Home' });
+});
+
+/* GET Menu page. */
+router.get('/menu', function(req, res, next) {
+  res.render('menu', { title: 'Our Menu' });
+});
+
+/* GET About page. */
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'Our Story' });
+});
+
+/* GET Comments page (Read). */
+router.get('/comments', function(req, res, next) {
   try {
-    req.db.query('SELECT * FROM todos;', (err, results) => {
+    req.db.query('SELECT * FROM comments ORDER BY created_at DESC;', (err, results) => {
       if (err) {
-        console.error('Error fetching todos:', err);
-        return res.status(500).send('Error fetching todos');
+        console.error('Error fetching comments:', err);
+        return res.status(500).send('Error fetching comments');
       }
-      res.render('index', { title: 'My Simple TODO', todos: results });
+      res.render('comments', { title: 'Customer Love', comments: results });
     });
   } catch (error) {
-    console.error('Error fetching items:', error);
-    res.status(500).send('Error fetching items');
+    console.error('Error in route:', error);
+    res.status(500).send('Server Error');
   }
 });
 
-router.post('/create', function (req, res, next) {
-    const { task } = req.body;
+/* POST New Comment (Create). */
+router.post('/comments/add', function (req, res, next) {
+    const { customer_name, message } = req.body;
     try {
-      req.db.query('INSERT INTO todos (task) VALUES (?);', [task], (err, results) => {
+      req.db.query('INSERT INTO comments (customer_name, message) VALUES (?, ?);', [customer_name, message], (err, results) => {
         if (err) {
-          console.error('Error adding todo:', err);
-          return res.status(500).send('Error adding todo');
+          console.error('Error adding comment:', err);
+          return res.status(500).send('Error adding comment');
         }
-        console.log('Todo added successfully:', results);
-        // Redirect to the home page after adding
-        res.redirect('/');
+        res.redirect('/comments');
       });
     } catch (error) {
-      console.error('Error adding todo:', error);
-      res.status(500).send('Error adding todo');
-    }
-});
-
-router.post('/delete', function (req, res, next) {
-    const { id } = req.body;
-    try {
-      req.db.query('DELETE FROM todos WHERE id = ?;', [id], (err, results) => {
-        if (err) {
-          console.error('Error deleting todo:', err);
-          return res.status(500).send('Error deleting todo');
-        }
-        console.log('Todo deleted successfully:', results);
-        // Redirect to the home page after deletion
-        res.redirect('/');
-    });
-    }catch (error) {
-        console.error('Error deleting todo:', error);
-        res.status(500).send('Error deleting todo:');
+      console.error('Error:', error);
+      res.status(500).send('Error adding comment');
     }
 });
 
